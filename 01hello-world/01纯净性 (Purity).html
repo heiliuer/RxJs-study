@@ -5,17 +5,19 @@
     <title>01hello-world</title>
 </head>
 <body>
+<p>使得 RxJS 强大的正是它使用纯函数来产生值的能力。这意味着你的代码更不容易出错</p>
+
 <button id="click">
-    click me
+    click me <span id="times">0</span> times
 </button>
 </body>
 <script src="../libs/rx.all.js"></script>
 <script>
     var button = document.querySelector('#click');
+    var times = document.querySelector('#times');
     Rx.Observable.fromEvent(button, 'click')
-        .subscribe(function () {
-                alert('Clicked!')
-            }
-        );
+        .scan(count => count + 1, 0)
+        .subscribe(count => times.innerHTML = `${count}`);
+
 </script>
 </html>

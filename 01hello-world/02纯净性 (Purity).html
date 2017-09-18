@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01hello-world</title>
+</head>
+<body>
+<p>
+    RxJS 提供了一整套操作符来帮助你控制事件如何流经 observables 。<br>
+
+    下面的代码展示的是如何控制一秒钟内最多点击一次，先来看使用普通的 JavaScript：</p>
+
+<button id="click">
+    click me <span id="times">0</span> times
+</button>
+
+</body>
+<script src="../libs/rx.all.js"></script>
+<script>
+    var button = document.querySelector('#click');
+    var times = document.querySelector('#times');
+    Rx.Observable.fromEvent(button, 'click')
+        .throttle(1000)
+        .scan(count => count + 1, 0)
+        .subscribe(count => times.innerHTML = `${count}`);
+</script>
+</html>
