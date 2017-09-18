@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01hello-world</title>
+</head>
+<body>
+<p>
+    对于流经 observables 的值，你可以对其进行转换。<br>
+
+    下面的代码展示的是如何累加每次点击的鼠标 x 坐标，先来看使用普通的 JavaScript：</p>
+
+<button id="click">
+    click me <span id="times"></span>
+</button>
+
+</body>
+<script src="../libs/rx.all.js"></script>
+<script>
+    var button = document.querySelector('#click');
+    var times = document.querySelector('#times');
+    Rx.Observable.fromEvent(button, 'click')
+        .map(event => event.clientX)
+        .scan((data, clientX, times) => ({...data, clientX, times}), {})
+        .subscribe(count => times.innerHTML = `${JSON.stringify(count)}`);
+</script>
+</html>
