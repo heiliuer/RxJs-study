@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01hello-world</title>
+</head>
+<body>
+<button id="click">
+    click me
+</button>
+</body>
+<script src="../libs/rx.all.js"></script>
+<script>
+    var button = document.querySelector('#click');
+    Rx.Observable.fromEvent(button, 'click')
+        .subscribe(function () {
+                alert('Clicked!')
+            }
+        );
+</script>
+</html>
