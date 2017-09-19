@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01hello-world</title>
+</head>
+<body>
+<p>当订阅下面代码中的 Observable 的时候会立即(同步地)推送值1、2、3，然后1秒后会推送值4，再然后是完成流</p>
+</body>
+<script src="../libs/rx.all.js"></script>
+<script>
+
+    var observable = Rx.Observable.create(function (observer) {
+        observer.next(1)
+        observer.next(2)
+        observer.next(3)
+        setTimeout(() => {
+            observer.next(4)
+            observer.completed()
+//            observer.error()
+        }, 3000)
+
+        observer.next(5)
+    })
+
+    console.log('just before subscribe');
+    observable.subscribe(function (txt) {
+        console.log('oOrOnNext', arguments)
+    }, function () {
+        console.log('onError', arguments)
+    }, function () {
+        console.log('onCompleted', arguments)
+    });
+    console.log('just after subscribe');
+
+</script>
+</html>
